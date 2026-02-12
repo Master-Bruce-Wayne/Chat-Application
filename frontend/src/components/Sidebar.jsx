@@ -9,13 +9,18 @@ const Sidebar = () => {
             <input 
                 type="text" className='bg-white text-black input input-bordered rounded-md' placeholder='Search...'
             />
-            <button type='submit' className='btn text-white bg-zinc-500'>
+            <button type='submit' className='btn text-white bg-zinc-500 border border-white'>
                 <BiSearchAlt2 className='w-6 h-6 outline-none'/>
             </button>
 
         </form>
         <div className="divider divider-neutral"></div>
+
         <OtherUsers/>
+
+        <div className='mt-2'>
+            <button className='btn btn-sm'>Logout</button>
+        </div>
     </div>
   )
 }
