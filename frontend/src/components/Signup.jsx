@@ -27,10 +27,11 @@ const Signup = () => {
 
             if(res.data.success) {
                 navigate("/login");
-                toast.success(res.data.message);
+                toast.success(res.data.message || "User registered successfully!");
             }
         } catch(err) {
-            console.log(err);
+            // console.log(err);
+            toast.error(err.response.data.message || "Failed to register")
         } finally{
             setUser({
                 fullName:"", username:"", password:"",
