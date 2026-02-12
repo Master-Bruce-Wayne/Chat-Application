@@ -1,5 +1,6 @@
 import React from 'react'
 import {BiSearchAlt2} from "react-icons/bi"
+import OtherUsers from './OtherUsers.jsx'
 
 const Sidebar = () => {
   return (
@@ -14,6 +15,7 @@ const Sidebar = () => {
 
         </form>
         <div className="divider divider-neutral"></div>
+        <OtherUsers/>
     </div>
   )
 }

@@ -35,7 +35,7 @@ const Login = () => {
 
   return (
     <div className='min-w-96 mx-auto'>
-        <div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 text-black'>
+        <div className='w-full p-6 rounded-lg shadow-md  bg-transparent bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 backdrop-saturate-100 backdrop-contrast-100 border border-gray-100 text-black'>
             <h1 className='text-3xl font-bold text-center'>Login</h1>
             <form onSubmit={onSubmitHandler}>
                 <div>
