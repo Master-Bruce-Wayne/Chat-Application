@@ -4,7 +4,7 @@ import OtherUsers from './OtherUsers.jsx'
 
 const Sidebar = () => {
   return (
-    <div className='border-r border-slate-500 p-4 flex flex-col'>
+    <div className='border-r border-slate-500 p-4 flex flex-col w-1/2'>
         <form className='flex items-center gap-2'>
             <input 
                 type="text" className='bg-white text-black input input-bordered rounded-md' placeholder='Search...'

@@ -1,8 +1,12 @@
 import React from 'react'
+import InputSender from './InputSender.jsx'
 
 const MessageContainer = () => {
   return (
-    <div>MessageContainer</div>
+    <div className='w-full'>
+        MessageContainer
+        <InputSender/>
+    </div>
   )
 }
 
