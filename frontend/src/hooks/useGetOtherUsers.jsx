@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
 import {useDispatch} from "react-redux"
-import { setOtherUsers } from '../redux/userSlice.js';
+import { setOtherUsers, setOtherUsersOrig } from '../redux/userSlice.js';
 
 const useGetOtherUsers = () => {
     const dispatch =useDispatch();
@@ -15,6 +15,7 @@ const useGetOtherUsers = () => {
 
             // store
             dispatch(setOtherUsers(res.data));
+            dispatch(setOtherUsersOrig(res.data));
         } catch(err) {
             console.log(err);
         }

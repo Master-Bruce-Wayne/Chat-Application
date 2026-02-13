@@ -35,10 +35,11 @@ const MessageContainer = () => {
 
             <InputSender/>
           </div>
-          : 
-            <div>
-              <p>Let's start a conversation!</p>
-            </div>
+        : 
+          <div className='w-full h-full flex flex-col justify-center items-center'>
+            <h1 className='text-4xl text-black font-bold'>Hi, {authUser?.fullName}</h1>
+            <h1 className='text-2xl text-black'>Let's start some conversation!</h1>
+          </div>
       }
     </>
   )
