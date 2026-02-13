@@ -1,17 +1,19 @@
 import React from 'react'
 
-const OtherUser = () => {
+const OtherUser = (props) => {
+    const user=props.user;
+
   return (
     <div>
         <div className='flex gap-2 items-center hover:bg-zinc-100 rounded p-2 cursor-pointer'>
             <div className='avatar avatar-online'>
                 <div className='w-12 rounded-full'>
-                    <img src="https://i.pinimg.com/1200x/82/54/65/825465db4b7282e95543c1b27bd372cb.jpg" alt="" />
+                    <img src={user?.profilePhoto} alt="" />
                 </div>
             </div>
             <div className='flex flex-col flex-1'>
                 <div className='flex justify-between gap-2'>
-                    <p>Sujal Agarwal</p>
+                    <p>{user?.fullName}</p>
                 </div>
             </div>
         </div>
