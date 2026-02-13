@@ -4,15 +4,19 @@ import useGetMessages from '../hooks/useGetMessages'
 import { useSelector } from 'react-redux'
 
 const Messages = () => {
-  const {selectedUser} = useSelector(store=>store.user);
-  useGetMessages(selectedUser);
-  
+  useGetMessages();
+  const {messages} = useSelector(store=>store.message);
+  if(!messages) { return; }
+
   return (
     <div className='px-4 flex-1 overflow-auto'>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
+      {
+        messages?.map((message)=>{
+          return (
+            <Message key={message._id} message={message}/>
+          )
+        })
+      }
     </div>
   )
 }
