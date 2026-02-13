@@ -4,12 +4,20 @@ import OtherUsers from './OtherUsers.jsx'
 import axios from "axios";
 import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuthUser, setOtherUsers, setSelectedUser } from '../redux/userSlice.js';
+import { setMessages } from '../redux/messageSlice.js';
 
 const Sidebar = () => {
     const navigate = useNavigate();
+    const dispatch=useDispatch();
+    const {authUser,selectedUser,otherUsers}=useSelector(store=>store.user);
+    const {messages}=useSelector(store=>store.message);
     const handleLogout = async() => {
         try {
             const res=await axios.get("http://localhost:8000/api/v1/user/logout");
+            dispatch(setAuthUser(null)); dispatch(setSelectedUser(null));
+            dispatch(setOtherUsers(null)); dispatch(setMessages(null));
             navigate("/login");
             toast.success(res.data.message);
         } catch(err) {
@@ -18,7 +26,7 @@ const Sidebar = () => {
         }
     }
   return (
-    <div className='border-r border-slate-500 p-4 flex flex-col w-1/2'>
+    <div className='border-r border-slate-500 p-4 flex flex-col min-w-1/3 max-w-5/12'>
         <form className='flex items-center gap-2'>
             <input 
                 type="text" className='bg-white text-black input input-bordered rounded-md' placeholder='Search...'
