@@ -27,7 +27,7 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  const {authUser} = useSelector(store=>store.user);
+  const {authUser, onlineUsers} = useSelector(store=>store.user);
   const {socket} =useSelector(store=>store.socket);
   const dispatch = useDispatch();
 
@@ -44,7 +44,14 @@ function App() {
         dispatch(setOnlineUsers(onlineUsers));
       });
 
-      return ()=> socket.close();
+      return ()=> {
+        const currOnlineUsers = onlineUsers?.filter(
+          uId => uId!==authUser?._id
+        );
+        
+        dispatch(setOnlineUsers(currOnlineUsers)); 
+        socket.close();
+      }
     } else {
       if(socket) {
         socket.close();

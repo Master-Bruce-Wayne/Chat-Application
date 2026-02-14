@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthUser, setOnlineUsers, setOtherUsers, setOtherUsersOrig, setSelectedUser } from '../redux/userSlice.js';
 import { setMessages } from '../redux/messageSlice.js';
+import { setSocket } from '../redux/socketSlice.js';
 
 const Sidebar = () => {
     const [searchText,setSearchText]= useState("");
@@ -14,6 +15,7 @@ const Sidebar = () => {
     const dispatch=useDispatch();
     const {authUser, otherUsersOrig, onlineUsers}=useSelector(store=>store.user);
     const {messages}=useSelector(store=>store.message);
+    const {socket}=useSelector(store=>store.socket);
 
     const handleFormSubmit = async(e) => {
         e.preventDefault();
@@ -33,10 +35,13 @@ const Sidebar = () => {
                 uId => uId!==authUser?._id
             );
 
+            // console.log(currOnlineUsers);
             dispatch(setOnlineUsers(currOnlineUsers));
             dispatch(setAuthUser(null)); dispatch(setSelectedUser(null));
             dispatch(setOtherUsers(null)); dispatch(setMessages(null));
             dispatch(setOtherUsersOrig(null));
+            socket?.disconnect();
+            dispatch(setSocket(null));
             navigate("/login");
             toast.success(res.data.message);
         } catch(err) {
