@@ -6,9 +6,9 @@ import useGetRealMsgs from '../hooks/useGetRealMsgs'
 
 const Messages = () => {
   useGetMessages();
+  useGetRealMsgs();
   const {messages} = useSelector(store=>store.message);
   if(!messages) { return; }
-  useGetRealMsgs();
 
   return (
     <div className='px-4 flex-1 overflow-auto'>
