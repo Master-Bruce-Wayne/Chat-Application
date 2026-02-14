@@ -5,14 +5,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthUser, setOtherUsers, setSelectedUser } from '../redux/userSlice.js';
+import { setAuthUser, setOnlineUsers, setOtherUsers, setOtherUsersOrig, setSelectedUser } from '../redux/userSlice.js';
 import { setMessages } from '../redux/messageSlice.js';
 
 const Sidebar = () => {
     const [searchText,setSearchText]= useState("");
     const navigate = useNavigate();
     const dispatch=useDispatch();
-    const {otherUsersOrig}=useSelector(store=>store.user);
+    const {authUser, otherUsersOrig, onlineUsers}=useSelector(store=>store.user);
     const {messages}=useSelector(store=>store.message);
 
     const handleFormSubmit = async(e) => {
@@ -29,8 +29,14 @@ const Sidebar = () => {
     const handleLogout = async() => {
         try {
             const res=await axios.get("http://localhost:8000/api/v1/user/logout");
+            const currOnlineUsers = onlineUsers.filter(
+                uId => uId!==authUser?._id
+            );
+
+            dispatch(setOnlineUsers(currOnlineUsers));
             dispatch(setAuthUser(null)); dispatch(setSelectedUser(null));
             dispatch(setOtherUsers(null)); dispatch(setMessages(null));
+            dispatch(setOtherUsersOrig(null));
             navigate("/login");
             toast.success(res.data.message);
         } catch(err) {
