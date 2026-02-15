@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {BiSearchAlt2} from "react-icons/bi"
 import OtherUsers from './OtherUsers.jsx'
 import axios from "axios";
@@ -16,6 +16,12 @@ const Sidebar = () => {
     const {authUser, otherUsersOrig, onlineUsers}=useSelector(store=>store.user);
     const {messages}=useSelector(store=>store.message);
     const {socket}=useSelector(store=>store.socket);
+
+    useEffect(() => {
+        if(searchText==="") {
+            dispatch(setOtherUsers(otherUsersOrig));
+        }
+    }, [searchText]);
 
     const handleFormSubmit = async(e) => {
         e.preventDefault();
