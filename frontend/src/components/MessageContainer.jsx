@@ -36,7 +36,7 @@ const MessageContainer = () => {
             <InputSender/>
           </div>
         : 
-          <div className='w-full h-full flex flex-col justify-center items-center'>
+          <div className='w-full h-full flex flex-col justify-center items-center flex-wrap'>
             <h1 className='text-4xl text-black font-bold'>Hi, {authUser?.fullName}</h1>
             <h1 className='text-2xl text-black'>Let's start some conversation!</h1>
           </div>
