@@ -13,9 +13,11 @@ const HomePage = () => {
   }, [authUser]);
 
   return (
-    <div className='flex w-full sm:w-11/12 h-[450px] sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-transparent bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 backdrop-saturate-100 backdrop-contrast-100 border border-gray-400 text-black'>
-      <Sidebar />
-      <MessageContainer/>
+    <div className="min-h-screen w-full flex items-center justify-center p-4 md:p-8">
+      <div className="w-full max-w-6xl h-[85vh] flex overflow-hidden bg-slate-900/40 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-2xl text-white">
+        <Sidebar />
+        <MessageContainer />
+      </div>
     </div>
   )
 }

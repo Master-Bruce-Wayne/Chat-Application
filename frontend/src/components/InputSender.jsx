@@ -35,18 +35,20 @@ const InputSender = () => {
   }
 
   return (
-    <form onSubmit={onSubmitHandler} className='w-full px-2 my-3 border border-white'>
-        <div className='w-full relative'>
-            <input 
-            type="text" 
-            value={msg}
-            onChange={(e)=>setMsg(e.target.value)}
-            placeholder='Send a message...' 
-            className='px-4 py-2 border text-sm rounded-lg block w-full p-3 border-white bg-gray-600 text-white'  
+    <form onSubmit={onSubmitHandler} className="w-full px-4 py-3 shrink-0">
+        <div className="w-full relative rounded-full bg-white/5 border border-white/10 focus-within:ring-1 focus-within:ring-indigo-500/50 transition-shadow">
+            <input
+                type="text"
+                value={msg}
+                onChange={(e) => setMsg(e.target.value)}
+                placeholder="Send a message..."
+                className="w-full pl-5 pr-12 py-3 bg-transparent text-white placeholder:text-slate-400 text-sm rounded-full focus:outline-none"
             />
-
-            <button type="submit" className='absolute flex inset-y-0 end-0 items-center pr-4 hover:cursor-pointer'>
-                <IoSend className='text-white'/>
+            <button
+                type="submit"
+                className="absolute inset-y-0 right-0 flex items-center justify-center pr-4 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
+            >
+                <IoSend className="text-indigo-400 w-5 h-5" />
             </button>
         </div>
     </form>

@@ -11,14 +11,10 @@ const Messages = () => {
   if(!messages) { return; }
 
   return (
-    <div className='px-4 flex-1 overflow-auto'>
-      {
-        messages && messages?.map((message)=>{
-          return (
-            <Message key={message._id} message={message}/>
-          )
-        })
-      }
+    <div className="px-4 py-3 flex-1 overflow-auto min-h-0">
+      {messages?.map((message) => (
+        <Message key={message._id} message={message} />
+      ))}
     </div>
   )
 }

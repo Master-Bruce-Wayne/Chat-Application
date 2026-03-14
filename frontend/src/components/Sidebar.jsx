@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import {BiSearchAlt2} from "react-icons/bi"
+import { BiSearchAlt2 } from "react-icons/bi"
+import { IoLogOutOutline } from "react-icons/io5"
 import OtherUsers from './OtherUsers.jsx'
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -56,28 +57,35 @@ const Sidebar = () => {
         }
     }
   return (
-    <div className='border-r border-slate-500 p-4 flex flex-col min-w-1/3 max-w-5/12'>
-        <form onSubmit={handleFormSubmit} className='flex items-center gap-2'>
-            <input 
-                type="text" 
+    <div className="h-full border-r border-white/10 bg-black/20 backdrop-blur-md p-4 flex flex-col min-w-1/3 max-w-5/12 relative">
+        <form onSubmit={handleFormSubmit} className="flex items-center gap-2 shrink-0">
+            <input
+                type="text"
                 value={searchText}
-                onChange={(e)=>setSearchText(e.target.value)}
-                className='bg-white text-black input input-bordered rounded-md' placeholder='Search...'
+                onChange={(e) => setSearchText(e.target.value)}
+                className="flex-1 bg-white/5 border border-white/10 text-white placeholder:text-slate-400 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500/50"
+                placeholder="Search..."
             />
-            <button type='submit' className='btn text-white bg-zinc-500 border border-white hover:cursor-pointer'>
-                <BiSearchAlt2 className='w-6 h-6 outline-none'/>
+            <button
+                type="submit"
+                className="rounded-full p-2 bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+            >
+                <BiSearchAlt2 className="w-5 h-5" />
             </button>
-
         </form>
-        <div className="divider divider-neutral"></div>
+        <div className="border-t border-white/10 my-3 shrink-0" />
 
-        <OtherUsers/>
+        <OtherUsers />
 
-        <div className='mt-2'>
-            <button 
-            className='btn btn-sm'
-            onClick={handleLogout}
-            >Logout</button>
+        <div className="mt-auto pt-4 pb-1">
+            <button
+                type="button"
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium bg-red-600/80 hover:bg-red-500 border border-red-500/30 text-white transition-colors cursor-pointer"
+            >
+                <IoLogOutOutline className="w-5 h-5" />
+                Logout
+            </button>
         </div>
     </div>
   )

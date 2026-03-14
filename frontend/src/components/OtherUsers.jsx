@@ -11,14 +11,10 @@ const OtherUsers = () => {
   if(!otherUsers) { return; }
 
   return (
-    <div className='overflow-auto flex-1'>
-        {
-          otherUsers?.map((user)=>{
-            return (
-              <OtherUser key={user._id} user={user} />
-            )
-          })
-        }
+    <div className="overflow-auto flex-1 min-h-0">
+        {otherUsers?.map((user) => (
+          <OtherUser key={user._id} user={user} />
+        ))}
     </div>
   )
 }
