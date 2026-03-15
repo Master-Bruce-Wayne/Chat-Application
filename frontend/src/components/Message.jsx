@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
+import { CheckCheck } from 'lucide-react'
 
 const Message = ({message}) => {
-    const scroll =useRef();
-    const {authUser,selectedUser} = useSelector(store=>store.user);
+    const scroll = useRef();
+    const {authUser, selectedUser} = useSelector(store => store.user);
 
     const formatTime = (timestamp) => {
         const date = new Date(timestamp);
@@ -13,25 +14,47 @@ const Message = ({message}) => {
         });
     };
 
-    // for scroll-behaviour (imp)
-    useEffect(()=>{
+    // Smooth auto-scroll on new messages
+    useEffect(() => {
         scroll.current?.scrollIntoView({behavior:"smooth"});
-    },[message]);
+    }, [message]);
+
+  const isSent = message.senderId === authUser?._id;
 
   return (
-    <div ref={scroll} className={`chat ${(message.senderId===authUser?._id)?'chat-end':'chat-start'}`}>
-        <div className="chat-image avatar">
-            <div className="w-10 rounded-full">
+    <div ref={scroll} className={`flex gap-2.5 mb-4 ${isSent ? "flex-row-reverse" : "flex-row"}`}>
+
+        {/* Avatar */}
+        <div className="shrink-0 self-end">
+            <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white/10">
                 <img
-                alt="Tailwind CSS chat bubble component"
-                src={(message.senderId===authUser?._id)?authUser?.profilePhoto:selectedUser?.profilePhoto}
+                    alt=""
+                    src={isSent ? authUser?.profilePhoto : selectedUser?.profilePhoto}
+                    className="w-full h-full object-cover"
                 />
             </div>
         </div>
-        <div className="chat-header">
-            <time className="text-xs opacity-50 text-black">{formatTime(message?.createdAt)}</time>
+
+        {/* Bubble + meta */}
+        <div className={`flex flex-col max-w-[72%] ${isSent ? "items-end" : "items-start"}`}>
+            <div
+                className={`px-4 py-2.5 text-white text-sm leading-relaxed ${
+                    isSent
+                        ? "bg-indigo-600/40 border border-indigo-400/30 rounded-2xl rounded-br-sm shadow-[0_2px_12px_rgba(99,102,241,0.25)]"
+                        : "bg-white/8 border border-white/10 text-slate-100 rounded-2xl rounded-bl-sm"
+                }`}
+            >
+                {message?.message}
+            </div>
+
+            {/* Timestamp + read status */}
+            <div className="flex items-center gap-1 mt-1">
+                <time className="text-[11px] text-slate-500">{formatTime(message?.createdAt)}</time>
+                {isSent && (
+                    <CheckCheck strokeWidth={1.5} className="w-3.5 h-3.5 text-indigo-400" />
+                )}
+            </div>
         </div>
-        <div className="chat-bubble">{message?.message}</div>
     </div>
   )
 }
