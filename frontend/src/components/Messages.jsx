@@ -1,4 +1,5 @@
 import React from 'react'
+import { MessageSquareDashed } from 'lucide-react'
 import Message from './Message'
 import useGetMessages from '../hooks/useGetMessages'
 import { useSelector } from 'react-redux'
@@ -45,13 +46,44 @@ const DateSeparator = ({ label }) => (
   </div>
 );
 
+// ─── EmptyChat ───────────────────────────────────────────────────────────────
+
+const EmptyChat = ({ username }) => (
+  <div className="relative z-10 h-full w-full flex flex-col items-center justify-center gap-5 p-8 text-center select-none">
+    {/* Watermark icon */}
+    <div className="relative flex items-center justify-center">
+      <div className="absolute w-40 h-40 rounded-full bg-indigo-500/5 blur-3xl" />
+      <div className="relative p-7 rounded-full bg-white/[0.03] border border-white/10">
+        <MessageSquareDashed strokeWidth={1} size={80} className="text-white opacity-10" />
+      </div>
+    </div>
+
+    {/* Copy */}
+    <div className="space-y-2">
+      <h2 className="text-xl font-bold text-white tracking-tight">
+        Start a new journey.
+      </h2>
+      <p className="text-slate-500 text-sm max-w-[240px] leading-relaxed">
+        No messages here yet... Send a wave to{' '}
+        <span className="text-indigo-400 font-medium">@{username}</span>!
+      </p>
+    </div>
+  </div>
+);
+
 // ─── Messages ─────────────────────────────────────────────────────────────────
 
 const Messages = () => {
   useGetMessages();
   useGetRealMsgs();
-  const { messages } = useSelector(store => store.message);
-  if (!messages) return null;
+  const { messages }     = useSelector(store => store.message);
+  const { selectedUser } = useSelector(store => store.user);
+
+  // No messages yet (null, undefined, or empty array) → show empty state
+  if (!Array.isArray(messages) || messages.length === 0) {
+    const username = selectedUser?.username ?? selectedUser?.fullName ?? 'them';
+    return <EmptyChat username={username} />;
+  }
 
   let lastDateKey = null;
 
